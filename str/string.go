@@ -1,4 +1,4 @@
-package spannerlib
+package str
 
 import (
 	"errors"
@@ -31,4 +31,11 @@ func StringPickStart(str, endTag string) (string, error) {
 	} else {
 		return "", fmt.Errorf("%w:%s", ErrNoFoundEndTag, endTag)
 	}
+}
+func Startwith(str, word string) bool {
+	l := len(word)
+	if len(str) < l {
+		return false
+	}
+	return str[0:l] == word
 }
