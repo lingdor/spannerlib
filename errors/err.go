@@ -30,6 +30,10 @@ func (k *KindWrapError[T]) GetData() T {
 	return k.data
 }
 
+func (k *KindWrapError[T]) GetDataInterface() any {
+	return k.data
+}
+
 func (k *KindWrapError[T]) ErrorStack() string {
 	return k.Error() + "\n" + string(k.Stack())
 }

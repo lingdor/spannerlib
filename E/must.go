@@ -4,12 +4,18 @@ import (
 	"github.com/lingdor/spannerlib/errors"
 )
 
+var mustErrData any = nil
+
 // Must If return error, will panic
 func Must(err error) {
 	if err != nil {
-		panic(errors.Wrap(err, 2, "must error was happened"))
+		panic(errors.Wrap(err, 2, mustErrData))
 	}
+	mustErrData = nil
+}
 
+func SetMustErrorData(v any) {
+	mustErrData = v
 }
 
 // Must1 If error no nil, will panic, use for 1 parameter return

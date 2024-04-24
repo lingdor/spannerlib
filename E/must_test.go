@@ -1,19 +1,24 @@
 package E
 
 import (
-	"github.com/lingdor/spannerlib/errors"
 	"strconv"
 	"testing"
 )
 
 func TestMust(t *testing.T) {
 
+	errMsg := "var1 value format failed"
 	defer func() {
 		err := recover()
-		v := err.(*errors.KindWrapError[string])
-		if v.GetData() != "must error was happened" {
-			t.Failed()
+		if dat, ok := GetErrorData[string](err); ok {
+			if dat == errMsg {
+				return
+			}
+			t.Errorf("not expect error data:%s", dat)
+			return
 		}
+		t.Errorf("not expect error:%v", err)
 	}()
+	SetMustErrorData(errMsg)
 	Must1(strconv.Atoi("abc"))
 }
