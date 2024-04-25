@@ -7,7 +7,7 @@ import (
 
 func TestMust(t *testing.T) {
 
-	errMsg := "var1 value format failed"
+	errMsg := "must method panic a error"
 	defer func() {
 		err := recover()
 		if dat, ok := GetErrorData[string](err); ok {
@@ -19,6 +19,19 @@ func TestMust(t *testing.T) {
 		}
 		t.Errorf("not expect error:%v", err)
 	}()
-	SetMustErrorData(errMsg)
 	Must1(strconv.Atoi("abc"))
+}
+
+func TestWhenError(t *testing.T) {
+	defer func() {
+		if err := recover(); err != nil {
+			if errrData, ok := GetErrorData[string](err); ok {
+				if errrData == "custome error" {
+					return
+				}
+			}
+		}
+		t.Error("recover not match")
+	}()
+	Catch1(strconv.Atoi("abc")).IfErrorData("custome error").Must()
 }
