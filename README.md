@@ -1,5 +1,11 @@
 # spannerlib
 a common base lib for golang
+
+# Get start
+
+```shell
+go get github.com/lingdor/spannerlib
+```
 # Features
 ## 1. Exception processing
 ### 1.1 Must get value and panic when wrong
