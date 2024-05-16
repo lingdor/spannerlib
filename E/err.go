@@ -1,6 +1,11 @@
 package E
 
-import "github.com/lingdor/spannerlib/errors"
+import (
+	"fmt"
+	"github.com/lingdor/spannerlib/errors"
+)
+
+var NotOKError error = fmt.Errorf("not ok error")
 
 // GetErrorData Get Error data if err is KindWrapError
 // Recommend:
